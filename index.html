@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog Produk</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px; }
+    h1 { text-align:center; }
+    .search-box { text-align:center; margin:20px 0; }
+    .search-box input { padding:8px; width:250px; }
+    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
+    .card { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:center; }
+    .card img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
+    .card h3 { margin:10px 0 5px; font-size:18px; }
+    .card p { font-size:14px; color:#555; }
+    .card button { background:#007bff; color:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+    .card button:hover { background:#0056b3; }
+  </style>
+</head>
+<body>
+  <h1>Katalog Produk</h1>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Cari produk...">
+  </div>
+  <div class="grid" id="productGrid"></div>
+
+  <script>
+    const products = [
+      { name: "Produk A", desc: "Deskripsi singkat produk A", img: "https://via.placeholder.com/200" },
+      { name: "Produk B", desc: "Deskripsi singkat produk B", img: "https://via.placeholder.com/200" },
+      { name: "Produk C", desc: "Deskripsi singkat produk C", img: "https://via.placeholder.com/200" },
+      { name: "Produk D", desc: "Deskripsi singkat produk D", img: "https://via.placeholder.com/200" }
+    ];
+
+    const grid = document.getElementById("productGrid");
+    const searchInput = document.getElementById("searchInput");
+
+    function renderProducts(list) {
+      grid.innerHTML = "";
+      list.forEach(p => {
+        grid.innerHTML += `
+          <div class="card">
+            <img src="${p.img}" alt="${p.name}">
+            <h3>${p.name}</h3>
+            <p>${p.desc}</p>
+            <button>Beli</button>
+          </div>
+        `;
+      });
+    }
+
+    renderProducts(products);
+
+    searchInput.addEventListener("input", e => {
+      const keyword = e.target.value.toLowerCase();
+      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
+      renderProducts(filtered);
+    });
+  </script>
+</body>
+</html>
