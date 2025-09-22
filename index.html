@@ -5,58 +5,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Katalog Produk</title>
   <style>
-    body { font-family: Arial, sans-serif; background:#f5f5f5; margin:0; padding:20px; }
-    h1 { text-align:center; }
-    .search-box { text-align:center; margin:20px 0; }
-    .search-box input { padding:8px; width:250px; }
-    .grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(200px,1fr)); gap:20px; }
-    .card { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 6px rgba(0,0,0,0.1); text-align:center; }
-    .card img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
-    .card h3 { margin:10px 0 5px; font-size:18px; }
-    .card p { font-size:14px; color:#555; }
-    .card button { background:#007bff; color:#fff; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-    .card button:hover { background:#0056b3; }
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    #searchInput { padding: 10px; width: 100%; max-width: 400px; margin-bottom: 20px; }
+    .product { border: 1px solid #ccc; padding: 10px; margin: 10px 0; border-radius: 5px; display: flex; align-items: center; gap: 15px; }
+    .product img { 
+      width: 100px; 
+      height: 100px; 
+      object-fit: cover; 
+      display: block; 
+      border-radius: 5px;
+    }
+    .product-info { flex: 1; }
+    .product-info h3 { margin: 0 0 5px; font-size: 1.1em; }
+    .product-info p { margin: 0 0 10px; color: #555; font-size: 0.9em; }
+    .cta { display: inline-block; padding: 5px 10px; background: #007BFF; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.85em; }
+    .cta:hover { background: #0056b3; }
   </style>
 </head>
 <body>
-  <h1>Katalog Produk</h1>
-  <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Cari produk...">
-  </div>
-  <div class="grid" id="productGrid"></div>
 
-  <script>
-    const products = [
-      { name: "Produk A", desc: "Deskripsi singkat produk A", img: "https://via.placeholder.com/200" },
-      { name: "Produk B", desc: "Deskripsi singkat produk B", img: "https://via.placeholder.com/200" },
-      { name: "Produk C", desc: "Deskripsi singkat produk C", img: "https://via.placeholder.com/200" },
-      { name: "Produk D", desc: "Deskripsi singkat produk D", img: "https://via.placeholder.com/200" }
-    ];
+<h1>Katalog Produk</h1>
+<input type="text" id="searchInput" placeholder="Cari produk...">
 
-    const grid = document.getElementById("productGrid");
-    const searchInput = document.getElementById("searchInput");
+<div id="productList"></div>
 
-    function renderProducts(list) {
-      grid.innerHTML = "";
-      list.forEach(p => {
-        grid.innerHTML += `
-          <div class="card">
-            <img src="${p.img}" alt="${p.name}">
+<!-- Fuse.js dari CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+<script>
+  const products = [
+    { name: "iPhone 14", description: "Smartphone Apple terbaru dengan kamera canggih", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Samsung Galaxy S23", description: "HP flagship Samsung dengan layar AMOLED", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Xiaomi Redmi Note 12", description: "HP mid-range dengan performa tinggi", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Oppo Reno 10", description: "Smartphone stylish dengan fitur kamera AI", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Vivo V27", description: "HP dengan desain tipis dan kamera selfie bagus", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Asus ROG Phone 7", description: "HP gaming dengan performa ekstrem", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "MacBook Air M2", description: "Laptop ringan dengan chip Apple M2", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Dell XPS 13", description: "Ultrabook premium dengan layar bezel tipis", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Sony WH-1000XM5", description: "Headphone noise cancelling terbaik", img: "https://via.placeholder.com/120", link: "#" },
+    { name: "Logitech MX Master 3S", description: "Mouse produktivitas dengan ergonomi terbaik", img: "https://via.placeholder.com/120", link: "#" }
+  ];
+
+  const options = {
+    keys: ["name", "description"],
+    threshold: 0.4
+  };
+
+  const fuse = new Fuse(products, options);
+  const productList = document.getElementById("productList");
+  const searchInput = document.getElementById("searchInput");
+
+  function renderProducts(list) {
+    productList.innerHTML = "";
+    list.forEach(p => {
+      const item = `
+        <div class="product">
+          <img src="${p.img}" alt="${p.name}">
+          <div class="product-info">
             <h3>${p.name}</h3>
-            <p>${p.desc}</p>
-            <button>Beli</button>
+            <p>${p.description}</p>
+            <a class="cta" href="${p.link}">Beli</a>
           </div>
-        `;
-      });
-    }
-
-    renderProducts(products);
-
-    searchInput.addEventListener("input", e => {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-      renderProducts(filtered);
+        </div>
+      `;
+      productList.innerHTML += item;
     });
-  </script>
+  }
+
+  renderProducts(products);
+
+  searchInput.addEventListener("input", e => {
+    const query = e.target.value;
+    if (!query) {
+      renderProducts(products);
+    } else {
+      const result = fuse.search(query).map(r => r.item);
+      renderProducts(result);
+    }
+  });
+</script>
+
 </body>
 </html>
