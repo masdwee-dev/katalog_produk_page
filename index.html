@@ -5,114 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Katalog Produk</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    #searchInput { padding: 10px; width: 100%; max-width: 400px; margin-bottom: 20px; }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 15px;
-    }
-
-    .product {
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      padding: 10px;
-      text-align: center;
-    }
-
-    .product img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      display: block;
-      margin: 0 auto 10px;
-      border-radius: 5px;
-    }
-
-    .product h3 {
-      font-size: 12px;
-      margin: 5px 0;
-    }
-
-    .product p {
-      font-size: 9px;
-      color: #555;
-      margin: 0 0 10px;
-    }
-
-    .cta {
-      display: inline-block;
-      padding: 5px 10px;
-      background: #007BFF;
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      font-size: 0.85em;
-    }
-
-    .cta:hover { background: #0056b3; }
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+    .search-box { text-align: center; margin-bottom: 20px; }
+    .search-box input { padding: 8px; width: 60%; max-width: 400px; border: 1px solid #ccc; border-radius: 4px; }
+    .products { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .product { border: 1px solid #ddd; border-radius: 6px; padding: 8px; background: #fff; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .product img { width: 100px; height: 100px; object-fit: cover; margin-bottom: 6px; }
+    .product-title { font-size: 10px; font-weight: bold; margin: 4px 0; line-height: 1.2; word-wrap: break-word; text-align: center; }
+    .btn { display: inline-block; padding: 4px 10px; margin-top: 6px; background: #4f46e5; color: #fff; font-size: 11px; border-radius: 4px; text-decoration: none; transition: background 0.3s; }
+    .btn:hover { background: #3730a3; }
+    @media (max-width: 900px) { .products { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 600px) { .products { grid-template-columns: 1fr; } .product-title { font-size: 12px; } }
   </style>
 </head>
 <body>
 
-<h1>Katalog Produk</h1>
-<input type="text" id="searchInput" placeholder="Cari produk...">
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Cari produk...">
+  </div>
 
-<div id="productList" class="grid"></div>
+  <div class="products" id="productsList">
+    <div class="product" id="produk-1">
+      <img src="https://via.placeholder.com/100" alt="Produk 1">
+      <p class="product-title">Produk Panjang Banget Namanya Biar Tes Grid</p>
+      <a href="#" class="btn">Beli</a>
+    </div>
+    <div class="product" id="produk-2">
+      <img src="https://via.placeholder.com/100" alt="Produk 2">
+      <p class="product-title">Produk 2</p>
+      <a href="#" class="btn">Beli</a>
+    </div>
+    <div class="product" id="produk-3">
+      <img src="https://via.placeholder.com/100" alt="Produk 3">
+      <p class="product-title">Produk 3</p>
+      <a href="#" class="btn">Beli</a>
+    </div>
+    <div class="product" id="produk-4">
+      <img src="https://via.placeholder.com/100" alt="Produk 4">
+      <p class="product-title">Produk 4</p>
+      <a href="#" class="btn">Beli</a>
+    </div>
+  </div>
 
-<!-- Fuse.js dari CDN -->
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
-<script>
-  const products = [
-    { id: "Warhammer 4k - Darktide", name: "Warhammer 40,000 : Darktide", description: "Kompatibel Windows PC", img: "https://www.yuplay.com/media/products/warhammer-40000-darktide/616/8c76a513988bafa50feb968e4ec6715757b43590.jpg", link: "https://www.play-asia.com/warhammer-40000-darktide/13/70fv5b?tagid=865932" },
-    { id: "River City Girls", name: "River City Girls [Complete Edition] First Print Edition (Multi-Language)", description: "NS; NS2", img: "https://s.pacn.ws/1/p/1cp/river-city-girls-complete-edition-first-print-edition-multilan-876873.10.jpg", link: "https://www.play-asia.com/river-city-girls-complete-edition-first-print-edition-multi-lang/13/70isll?tagid=865932" },
-    { id: "produk-xiaomi", name: "Xiaomi Redmi Note 12", description: "HP mid-range dengan performa tinggi", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-oppo", name: "Oppo Reno 10", description: "Smartphone stylish dengan fitur kamera AI", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-vivo", name: "Vivo V27", description: "HP dengan desain tipis dan kamera selfie bagus", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-asusrog", name: "Asus ROG Phone 7", description: "HP gaming dengan performa ekstrem", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-macbook", name: "MacBook Air M2", description: "Laptop ringan dengan chip Apple M2", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-dell", name: "Dell XPS 13", description: "Ultrabook premium dengan layar bezel tipis", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-sony", name: "Sony WH-1000XM5", description: "Headphone noise cancelling terbaik", img: "https://via.placeholder.com/120", link: "#" },
-    { id: "produk-logitech", name: "Logitech MX Master 3S", description: "Mouse produktivitas dengan ergonomi terbaik", img: "https://via.placeholder.com/120", link: "#" }
-  ];
+  <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
+  <script>
+    const products = [
+      { id: "produk-1", name: "Produk Panjang Banget Namanya Biar Tes Grid" },
+      { id: "produk-2", name: "Produk 2" },
+      { id: "produk-3", name: "Produk 3" },
+      { id: "produk-4", name: "Produk 4" }
+    ];
 
-  const options = {
-    keys: ["name", "description"],
-    threshold: 0.4
-  };
+    const fuse = new Fuse(products, { keys: ['name'], threshold: 0.4 });
+    const searchInput = document.getElementById('searchInput');
+    const productsList = document.getElementById('productsList');
 
-  const fuse = new Fuse(products, options);
-  const productList = document.getElementById("productList");
-  const searchInput = document.getElementById("searchInput");
-
-  function renderProducts(list) {
-    productList.innerHTML = "";
-    list.forEach(p => {
-      const item = `
-        <div id="${p.id}" class="product">
-          <img src="${p.img}" alt="${p.name}">
-          <p>${p.name}</p>
-          <p>${p.description}</p>
-          <a class="cta" href="${p.link}">Beli</a>
-        </div>
-      `;
-      productList.innerHTML += item;
+    searchInput.addEventListener('input', () => {
+      const query = searchInput.value.trim();
+      let results = query ? fuse.search(query).map(res => res.item) : products;
+      productsList.innerHTML = '';
+      results.forEach(prod => {
+        const el = document.createElement('div');
+        el.className = 'product';
+        el.id = prod.id;
+        el.innerHTML = `
+          <img src="https://via.placeholder.com/100" alt="${prod.name}">
+          <p class="product-title">${prod.name}</p>
+          <a href="#" class="btn">Beli</a>
+        `;
+        productsList.appendChild(el);
+      });
     });
-  }
-
-  renderProducts(products);
-
-  searchInput.addEventListener("input", e => {
-    const query = e.target.value;
-    if (!query) {
-      renderProducts(products);
-    } else {
-      const result = fuse.search(query).map(r => r.item);
-      renderProducts(result);
-    }
-  });
-</script>
-
+  </script>
 </body>
 </html>
