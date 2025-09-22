@@ -65,16 +65,16 @@
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 <script>
   const products = [
-    { name: "iPhone 14", description: "Smartphone Apple terbaru dengan kamera canggih", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Samsung Galaxy S23", description: "HP flagship Samsung dengan layar AMOLED", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Xiaomi Redmi Note 12", description: "HP mid-range dengan performa tinggi", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Oppo Reno 10", description: "Smartphone stylish dengan fitur kamera AI", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Vivo V27", description: "HP dengan desain tipis dan kamera selfie bagus", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Asus ROG Phone 7", description: "HP gaming dengan performa ekstrem", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "MacBook Air M2", description: "Laptop ringan dengan chip Apple M2", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Dell XPS 13", description: "Ultrabook premium dengan layar bezel tipis", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Sony WH-1000XM5", description: "Headphone noise cancelling terbaik", img: "https://via.placeholder.com/120", link: "#" },
-    { name: "Logitech MX Master 3S", description: "Mouse produktivitas dengan ergonomi terbaik", img: "https://via.placeholder.com/120", link: "#" }
+    { id: "produk-iphone", name: "iPhone 14", description: "Smartphone Apple terbaru dengan kamera canggih", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-samsung", name: "Samsung Galaxy S23", description: "HP flagship Samsung dengan layar AMOLED", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-xiaomi", name: "Xiaomi Redmi Note 12", description: "HP mid-range dengan performa tinggi", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-oppo", name: "Oppo Reno 10", description: "Smartphone stylish dengan fitur kamera AI", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-vivo", name: "Vivo V27", description: "HP dengan desain tipis dan kamera selfie bagus", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-asusrog", name: "Asus ROG Phone 7", description: "HP gaming dengan performa ekstrem", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-macbook", name: "MacBook Air M2", description: "Laptop ringan dengan chip Apple M2", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-dell", name: "Dell XPS 13", description: "Ultrabook premium dengan layar bezel tipis", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-sony", name: "Sony WH-1000XM5", description: "Headphone noise cancelling terbaik", img: "https://via.placeholder.com/120", link: "#" },
+    { id: "produk-logitech", name: "Logitech MX Master 3S", description: "Mouse produktivitas dengan ergonomi terbaik", img: "https://via.placeholder.com/120", link: "#" }
   ];
 
   const options = {
@@ -90,7 +90,7 @@
     productList.innerHTML = "";
     list.forEach(p => {
       const item = `
-        <div class="product">
+        <div id="${p.id}" class="product">
           <img src="${p.img}" alt="${p.name}">
           <h3>${p.name}</h3>
           <p>${p.description}</p>
