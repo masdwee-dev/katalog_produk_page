@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog 2</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background-color: #f9f9ff; /* background lembut */
+    }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .product {
+      border: 1px solid #99ccee; /* biru lembut */
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    .product img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      margin-bottom: 6px;
+      border-radius: 4px;
+    }
+    .product-title {
+      font-size: 12px;
+      margin: 6px 0;
+      color: #333366; /* teks agak gelap */
+    }
+    .product-description {
+      font-size: 10px;
+      margin: 6px 0;
+      color: #000000; 
+    }
+    .product button {
+      padding: 4px 10px;
+      font-size: 12px;
+      cursor: pointer;
+      background-color: #3399ff;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+    }
+    .product button:hover {
+      background-color: #2277cc;
+    }
+    @media (max-width: 900px) {
+      .products { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .products { grid-template-columns: 1fr; }
+      .product-title { font-size: 10px; }
+      .product-description { font-size: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <h2>Katalog Produk 2</h2>
+  <div class="products">
+    <div class="product">
+      <img src="https://s.pacn.ws/1/p/192/nendoroid-no-2520-pikmin-bulborb-811115.1.jpg" alt="Nendoroid No. 2520 Pikmin:Bulborb">
+      <p class="product-title">Nendoroid No. 2520 Pikmin: Bulborb</p>
+      <p class="product-description">US$49.99</p>
+      <a href="https://www.play-asia.com/nendoroid-no-2520-pikmin-bulborb/13/70hduz?tagid=865932" rel="nofollow" target="_blank"><button>Beli</button></a>
+    </div>
+    <div class="product">
+      <img src="https://s.pacn.ws/1/p/1da/nendoroid-no-2238-how-to-train-your-dragon-toothless-rerun-887161.1.jpg" alt="Nendoroid No. 2238 How to Train Your Dragon: Toothless (Re-run)">
+      <p class="product-tite">Nendoroid No. 2238 How to Train Your Dragon: Toothless (Re-run)</p>
+      <p class="product-description">US$63.99</p>
+      <a href="link url" rel="nofollow" target="_blank"><button>Beli</button></a>
+    </div>
+    <div class="product">
+      <img src="https://s.pacn.ws/1/p/1a0/nendoroid-no-2599-kirby-cafe-waddle-dee-kirby-cafe-ver-828139.1.jpg" alt="Nendoroid No. 2599 Kirby Cafe: Waddle Dee Kirby Cafe Ver.">
+      <p class="product-title">Nendoroid No. 2599 Kirby Cafe: Waddle Dee Kirby Cafe Ver.</p>
+      <p class="product-description">US$47.99</p>
+      <a href="https://www.play-asia.com/nendoroid-no-2238-how-to-train-your-dragon-toothless-re-run/13/70j0jd?tagid=865932" rel="nofollow" target="_blank"><button>Beli</button></a>
+    </div>
+    <div class="product">
+      <img src="https://s.pacn.ws/1/p/1cc/pokemon-pokemon-scale-world-hisui-region-set-870139.1.jpg" alt="Pokemon: Pokemon Scale World Hisui Region Set">
+      <p class="product-title">Pokemon: Pokemon Scale World Hisui Region Set</p>
+      <p class="product-description">US$35.99</p>
+      <a href="https://www.play-asia.com/nendoroid-no-2599-kirby-cafe-waddle-dee-kirby-cafe-ver/13/70hqzv?tagid=865932" rel="nofollow" target="_blank"><button>Beli</button></a>
+    </div>
+  </div>
+</body>
+</html>
